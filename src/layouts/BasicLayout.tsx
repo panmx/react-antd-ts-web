@@ -8,9 +8,25 @@ const {Header, Content, Sider} = Layout;
 
 export default function BasicLayout(props: any) {
     let [collapsed, setCollapsed] = useState(false) // 是否收起菜单, true为收起
-    useEffect(() => {
+    let [menuList, setMenuList] = useState([{"title":"系统管理","key":"96","children":[{"title":"组织管理","key":"97","children":[{"title":"用户管理","key":"98","children":[],"menuIcon":"user","menuPath":"/system/organization/empUser","menuTarget":"","component":"","isShow":"1"},{"title":"机构管理","key":"99","children":[],"menuIcon":"heart","menuPath":"/system/organization/office","menuTarget":"","component":"","isShow":"1"},{"title":"公司管理","key":"100","children":[],"menuIcon":"star","menuPath":"/system/organization/company","menuTarget":"","component":"","isShow":"1"},{"title":"岗位管理","key":"101","children":[],"menuIcon":"paper-clip","menuPath":"/system/organization/post","menuTarget":"","component":"","isShow":"1"}],"menuIcon":"team","menuPath":"/system/organization","menuTarget":"","component":"","isShow":"1"},{"title":"权限管理","key":"102","children":[{"title":"角色管理","key":"103","children":[],"menuIcon":"bulb","menuPath":"/system/permission/role","menuTarget":"","component":"","isShow":"1"},{"title":"二级管理员","key":"104","children":[],"menuIcon":"user-delete","menuPath":"/system/permission/secAdmin","menuTarget":"","component":"","isShow":"1"}],"menuIcon":"appstore","menuPath":"/system/permission","menuTarget":"","component":"","isShow":"1"},{"title":"系统设置","key":"106","children":[{"title":"参数设置","key":"109","children":[],"menuIcon":"heat-map","menuPath":"/system/config/parameter","menuTarget":"","component":"","isShow":"1"},{"title":"字典管理","key":"110","children":[],"menuIcon":"crown","menuPath":"/system/config/dictType","menuTarget":"","component":"","isShow":"1"},{"title":"行政区划","key":"111","children":[],"menuIcon":"environment","menuPath":"/system/config/area","menuTarget":"","component":"","isShow":"1"}],"menuIcon":"setting","menuPath":"/system/config","menuTarget":"","component":"","isShow":"1"}],"menuIcon":"setting","menuPath":"/system","menuTarget":"","component":"","isShow":"1"},{"title":"微信公众号管理","key":"254","children":[{"title":"消息模板","key":"264","children":[],"menuIcon":"block","menuPath":"/gzh/wxmpTemplate","menuTarget":"","component":"","isShow":"1"},{"title":"菜单管理","key":"255","children":[],"menuIcon":"hdd","menuPath":"/gzh/gzhMenuManage","menuTarget":"","component":"","isShow":"1"},{"title":"粉丝管理","key":"257","children":[],"menuIcon":"skin","menuPath":"/gzh/gzhUserManage","menuTarget":"","component":"","isShow":"1"},{"title":"账号管理","key":"256","children":[],"menuIcon":"strikethrough","menuPath":"/gzh/gzhAccountManage","menuTarget":"","component":"","isShow":"1"}],"menuIcon":"wechat","menuPath":"/gzh","menuTarget":"","component":"","isShow":"1"},{"title":"工作流管理","key":"273","children":[{"title":"我的申请","key":"274","children":[],"menuIcon":"retweet","menuPath":"/workflow/apply","menuTarget":"","component":"","isShow":"1"},{"title":"我的待办","key":"275","children":[],"menuIcon":"swap","menuPath":"/workflow/todo","menuTarget":"","component":"","isShow":"1"},{"title":"我的已办","key":"276","children":[],"menuIcon":"menu-fold","menuPath":"/workflow/done","menuTarget":"","component":"","isShow":"1"},{"title":"运行中的流程","key":"277","children":[],"menuIcon":"border-bottom","menuPath":"/workflow/processIns","menuTarget":"","component":"","isShow":"1"},{"title":"结束的流程","key":"278","children":[],"menuIcon":"border-top","menuPath":"/workflow/processFinish","menuTarget":"","component":"","isShow":"1"},{"title":"流程管理","key":"279","children":[],"menuIcon":"bold","menuPath":"/workflow/process","menuTarget":"","component":"","isShow":"1"},{"title":"模型管理","key":"280","children":[],"menuIcon":"layout","menuPath":"/workflow/model","menuTarget":"","component":"","isShow":"1"},{"title":"流程分类管理","key":"281","children":[],"menuIcon":"inbox","menuPath":"/workflow/workflowCategory","menuTarget":"","component":"","isShow":"1"}],"menuIcon":"car","menuPath":"/workflow","menuTarget":"","component":"","isShow":"1"}]) // 是否收起菜单, true为收起
 
+    useEffect(() => {
+        calcClientWidth()
+        window.onresize = function () {
+            calcClientWidth()
+        }
     }, [])
+
+    // 屏幕宽度小于指定的最小宽度，收起菜单；反之，展开菜单
+    const calcClientWidth = () => {
+        let clientWidth = document.documentElement && document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientHeight;
+        if (clientWidth && clientWidth < 1200) {
+            setCollapsed(true);
+        } else {
+            setCollapsed(false);
+        }
+    }
+
 
     const toggle = () => {
         setCollapsed(!collapsed);

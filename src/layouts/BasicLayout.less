@@ -1,5 +1,6 @@
 .ant-layout-sider-children {
   height: calc(100vh - 64px);
+  overflow-y: scroll;
 }
 .ant-layout-header {
   height: 64px;
@@ -44,4 +45,22 @@
 .site-layout-background {
   background: #fff;
   min-height: 100%;
+}
+
+::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width : 6px;  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.07);
+  background: #d2d2d2;
+  cursor: pointer;
+}
+::-webkit-scrollbar-thumb:hover {
+  /*滚动条里面小方块*/
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.07);
+  background: #bababa;
+  cursor: pointer;
 }
