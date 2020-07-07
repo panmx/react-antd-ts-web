@@ -42,3 +42,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### (要在命令行中使用，所以使用 dotenv-cli, dotenv可将环境变量从 .env 文件加载到 process.env中。)
+### npm install dotenv-cli --save-dev
