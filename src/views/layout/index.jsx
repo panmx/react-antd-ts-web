@@ -11,7 +11,7 @@ const Main = (props) => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider />
-      <Layout>
+      <Layout style={{ minWidth: "800px" }}>
         <Header />
         {tagsView ? <TagsView /> : null}
         <Content />

@@ -17,6 +17,7 @@ const ExportExcel = Loadable({loader: () => import(/*webpackChunkName:'ExportExc
 const UploadExcel = Loadable({ loader: () => import(/*webpackChunkName:'UploadExcel'*/'../views/excel/uploadExcel'),loading: Loading });
 const Zip = Loadable({loader: () => import(/*webpackChunkName:'Zip'*/'../views/zip'),loading: Loading});
 const Error404 = Loadable({loader: () => import(/*webpackChunkName:'Error404'*/'../views/error/404'),loading: Loading});
+const BaseTable = Loadable({loader: () => import(/*webpackChunkName:'Error404'*/'@/views/baseTable/index'),loading: Loading});
 
 export default [
   { path: "/dashboard", component: Dashboard, roles: ["admin","editor","guest"] },
@@ -36,4 +37,5 @@ export default [
   { path: "/excel/upload", component: UploadExcel, roles: ["admin","editor"] },
   { path: "/zip", component: Zip, roles: ["admin","editor"] },
   { path: "/error/404", component: Error404 },
+  { path: "/baseTable", component: BaseTable, roles: ["admin","editor"] },
 ];

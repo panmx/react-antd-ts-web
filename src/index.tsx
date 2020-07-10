@@ -10,7 +10,7 @@ import zhCN from "antd/es/locale/zh_CN";
 import store from "../src/store";
 import Router from "./router";
 import 'antd/dist/antd.css';
-import './index.css';
+import '../src/styles/index.less';
 import "./mock";
 import '@/lib/monitor';
 

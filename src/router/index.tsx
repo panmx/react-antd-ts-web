@@ -13,7 +13,6 @@ export interface Props {
 class Router extends React.Component<Props, {}> {
     constructor( props: Props ){
         super( props )
-        debugger
     }
     render() {
         return (

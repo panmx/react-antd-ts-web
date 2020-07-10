@@ -10,6 +10,12 @@ const menuList = [
     roles:["admin","editor","guest"]
   },
   {
+    title: "测试页面",
+    path: "/baseTable",
+    icon: "home",
+    roles:["admin","editor","guest"]
+  },
+  {
     title: "权限测试",
     path: "/permission",
     icon: "lock",
