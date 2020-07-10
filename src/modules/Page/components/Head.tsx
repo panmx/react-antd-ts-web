@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button} from "antd";
 import {PageContext} from '../PageProvider';
+import { ReloadOutlined, SearchOutlined, PlusOutlined } from '@ant-design/icons';
 
 /**
  * 页面头部
@@ -15,7 +16,6 @@ export default function Head(props) {
 
 
     const refreshData = (context) => {
-        context.page.title='33'
         context.setPage(context.page)
     }
 
@@ -23,6 +23,10 @@ export default function Head(props) {
         context.page.searchShowStatus = !context.page.searchShowStatus
         context.setPage(context.page)
         // props.page.showOrHiddenSearch(props.page)
+    }
+    const addBtnClick = (context) => {
+        context.page.formModalStatus = true
+        context.setPage(context.page)
     }
 
     return (
@@ -32,9 +36,9 @@ export default function Head(props) {
                     <div className="header-title">{context.page.title}</div>
 
                     <div className="buttons">
-                        <Button type="primary" onClick={() => refreshData(context)} icon="search">刷新</Button>
-                        <Button type="primary" onClick={() => searchBtnClick(context)} icon="search">搜索</Button>
-                        <Button type="primary" onClick={searchBtnClick} icon="search">新增</Button>
+                        <Button type="primary" onClick={() => refreshData(context)} icon={<ReloadOutlined/>}>刷新</Button>
+                        <Button type="primary" onClick={() => searchBtnClick(context)} icon={<SearchOutlined/>}>搜索</Button>
+                        <Button type="primary" onClick={() => addBtnClick(context)} icon={<PlusOutlined/>}>新增</Button>
                         {
                             context.page.headerExtraButtons ? context.page.headerExtraButtons.map((item, index) => (
                                 <Button  type={item.type || 'default'} key={index}>{item.label}</Button>

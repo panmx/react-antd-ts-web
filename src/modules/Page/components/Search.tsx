@@ -3,16 +3,12 @@ import {PageContext} from '../PageProvider';
 import {
     Form,
     Input,
-    Tooltip,
-    Cascader,
     Select,
-    Row,
-    Col,
     Checkbox,
     Button,
-    Radio,
-    AutoComplete,
+    Radio
 } from 'antd';
+import {SearchOutlined} from '@ant-design/icons';
 
 /**
  * 搜索
@@ -20,32 +16,24 @@ import {
  * @returns {*}
  * @constructor
  */
-export default function Search(props) {
+const Search = (props) => {
+    const [form] = Form.useForm();
+    const [formLayout, setFormLayout] = useState('horizontal');
+
     useEffect(() => {
 
     }, [])
 
-    // const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState('horizontal');
-
-    const onFormLayoutChange = ({ layout }) => {
-        setFormLayout(layout);
-    };
-
-    const formItemLayout =
-        formLayout === 'horizontal'
-            ? {
-                labelCol: { span: 4 },
-                wrapperCol: { span: 14 },
-            }
-            : null;
-
     const buttonItemLayout =
         formLayout === 'horizontal'
             ? {
-                wrapperCol: { span: 14, offset: 4 },
+                wrapperCol: {span: 14, offset: 4},
             }
             : null;
+
+    const searchBtnClick = (context) => {
+
+    }
 
     return (
         <PageContext.Consumer>
@@ -53,37 +41,49 @@ export default function Search(props) {
                 <div>
                     {
                         context.page.searchShowStatus ?
-                            <div className="base-page-search">343
-                                {/*<Form*/}
-                                {/*    {...formItemLayout}*/}
-                                {/*    layout={formLayout}*/}
-                                {/*    form={form}*/}
-                                {/*    initialValues={{ layout: formLayout }}*/}
-                                {/*    onValuesChange={onFormLayoutChange}*/}
-                                {/*>*/}
-                                {/*    <Form.Item label="Form Layout" name="layout">*/}
-                                {/*        <Radio.Group value={formLayout}>*/}
-                                {/*            <Radio.Button value="horizontal">Horizontal</Radio.Button>*/}
-                                {/*            <Radio.Button value="vertical">Vert+ical</Radio.Button>*/}
-                                {/*            <Radio.Button value="inline">Inline1</Radio.Button>*/}
-                                {/*        </Radio.Group>*/}
-                                {/*    </Form.Item>*/}
-                                {/*    <Form.Item label="Field A">*/}
-                                {/*        <Input placeholder="input placeholder" />*/}
-                                {/*    </Form.Item>*/}
-                                {/*    <Form.Item label="Field B">*/}
-                                {/*        <Input placeholder="input placeholder" />*/}
-                                {/*    </Form.Item>*/}
-                                {/*    <Form.Item {...buttonItemLayout}>*/}
-                                {/*        <Button type="primary">Submit</Button>*/}
-                                {/*    </Form.Item>*/}
-                                {/*</Form>*/}
+                            <div className="base-page-search">
+                                <Form form={form} layout="inline">
+                                    {
+                                        context.page.searchCondition ? Object.getOwnPropertyNames(context.page.searchCondition).map((item, index) => (
+                                            <span key={index}>
+                                                <Form.Item
+                                                    label={context.page.searchCondition[item].label}
+                                                    name={context.page.searchCondition[item]}
+                                                    rules={[{
+                                                        required: context.page.searchCondition[item].required || false,
+                                                        message: context.page.searchCondition[item].label + '必填*'
+                                                    }]}>
+                                                    {!context.page.searchCondition[item].type || context.page.searchCondition[item].type === 'input' ?
+                                                        <Input allowClear className="select-width"
+                                                               placeholder={context.page.searchCondition[item].placeholder || '请输入' + context.page.searchCondition[item].label}
+
+                                                        />
+                                                        : ''}
+                                                    {!context.page.searchCondition[item].type || context.page.searchCondition[item].type === 'select' ?
+                                                        <Select className="select-width" allowClear
+                                                                mode={context.page.searchCondition[item].mode || ''}
+                                                                placeholder={context.page.searchCondition[item].placeholder || '请选择' + context.page.searchCondition[item].label}>
+                                                            <Select.Option value="red">Red</Select.Option>
+                                                            <Select.Option value="green">Green</Select.Option>
+                                                            <Select.Option value="blue">Blue</Select.Option>
+                                                        </Select>
+                                                        : ''}
+
+                                                </Form.Item>
+                                            </span>
+                                        )) : ''
+                                    }
+                                    <Form.Item>
+                                        <Button type="primary" onClick={() => searchBtnClick(context)}
+                                                icon={<SearchOutlined/>}>搜索</Button>
+                                    </Form.Item>
+                                </Form>
                             </div>
-                        : ''
+                            : ''
                     }
                 </div>
             )}
-
         </PageContext.Consumer>
     );
 }
+export default Search;

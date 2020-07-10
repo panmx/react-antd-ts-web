@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import methods from './methods'
 import Head from './components/Head'
 import Search from './components/Search'
+import Table from './components/Table'
 import './index.less'
 
 /**
@@ -23,6 +24,7 @@ export default function BasePage(props) {
         <div className="base-page">
             <Head></Head>
             <Search></Search>
+            <Table></Table>
         </div>
     );
 }
