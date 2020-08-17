@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import BasePage from '../../modules/Page/index'
-import PageProvider from '../../modules/Page/PageProvider'
 
 /**
  * 测试页面
@@ -139,16 +138,14 @@ export default function BaseTable(props) {
 
     }, [])
 
-    const setParentPage = (page) => {
+    const pageChange = (page) => {
         console.log(page)
         setPageConfig(page)
     }
 
     return (
         <div className="base-table">
-            <PageProvider page={pageConfig} setParentPage={setParentPage}>
-                <BasePage page={pageConfig} refs='pageRefs'></BasePage>
-            </PageProvider>
+            <BasePage page={pageConfig} refs='pageRefs' pageChange={pageChange}></BasePage>
         </div>
     );
 }

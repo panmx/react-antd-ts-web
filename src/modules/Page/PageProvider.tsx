@@ -11,7 +11,7 @@ export const PageContext = React.createContext({
 // 定义 Props 类型
 export interface Props {
     page: object;
-    setParentPage: any;
+    pageChange: any;
 }
 
 // 导出 context 对象
@@ -29,7 +29,7 @@ export default class PageProvider extends Component <Props, {}> {
                 page: this.props.page,
                 setPage: (value) => {
                     this.setState(value)
-                    this.props.setParentPage(value)
+                    this.props.pageChange(value)
                 }
             }}>
                 {this.props.children} {/*这里显示所有的子组件都可以访问全局的store*/}
