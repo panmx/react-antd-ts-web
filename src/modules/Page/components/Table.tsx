@@ -19,16 +19,37 @@ import {SearchOutlined} from '@ant-design/icons';
  * @constructor
  */
 const TableComponent = (props) => {
-    let selectionConfig = {}
+    let [selectionConfig, setSelectionConfig] = useState<any>(null)
+    let [myContext, setMyContext] = useState<any>({})
 
     useEffect(() => {
-
     }, [])
+
+    useEffect(() => {
+        if (myContext.page && myContext.page.tableSelect) {
+            let configAll = {
+                fixed: true,
+                type: myContext.page.rowSelectType,
+                selections: myContext.page.selections,
+                selectedRowKeys: myContext.page.selectedRowKeys,
+                onChange: (keys, object) => {
+                    let config1 = selectionConfig || configAll
+                    config1.selectedRowKeys = keys || [];
+                    setSelectionConfig(config1)
+                    myContext.page.selectedRowKeys = keys || [];
+                    myContext.page.selectedRows = object || [];
+                    myContext.setPage(myContext.page)
+                }
+            };
+            setSelectionConfig(configAll)
+        }
+    }, [myContext])
 
     return (
         <PageContext.Consumer>
             {(context) => (
                 <div>
+                    {setMyContext(context)}
                     {
                         context.page.columnsConfig ?
                             <div className="base-page-table">
@@ -42,7 +63,9 @@ const TableComponent = (props) => {
                                        expandedRowKeys={context.page.tableExpandedRowKeys}
                                        onChange={context.page.tableChange}
                                        onExpand={context.page.expandChildrenTable}
-                                />
+                                >
+
+                                </Table>
                                 <FormComponent/>
                             </div>
                             : ''

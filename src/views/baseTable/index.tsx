@@ -9,7 +9,7 @@ import PageProvider from '../../modules/Page/PageProvider'
  * @constructor
  */
 export default function BaseTable(props) {
-    const [pageConfig, setPageConfig] = useState<object>({
+    let [pageConfig, setPageConfig] = useState<object>({
         onload: true,              // 页面加载状态
         loading: false,             // 数据加载状态
         title: '测试页面',              // 页面标题
@@ -88,7 +88,8 @@ export default function BaseTable(props) {
                 width: 80,
                 fixed: 'right',
                 align: 'center',
-                scopedSlots: {customRender: 'action'}
+                scopedSlots: {customRender: 'action'},
+                render: ()=> <a>cess</a>
             }
         ],
         dataList: [
@@ -114,6 +115,7 @@ export default function BaseTable(props) {
                 }
             }
         ],
+        tableSelect: false,
         // 页面头部额外按钮组
         headerExtraButtons: [
             {
@@ -137,10 +139,15 @@ export default function BaseTable(props) {
 
     }, [])
 
+    const setParentPage = (page) => {
+        console.log(page)
+        setPageConfig(page)
+    }
+
     return (
         <div className="base-table">
-            <PageProvider pageConfig={pageConfig}>
-                <BasePage page={pageConfig}></BasePage>
+            <PageProvider page={pageConfig} setParentPage={setParentPage}>
+                <BasePage page={pageConfig} refs='pageRefs'></BasePage>
             </PageProvider>
         </div>
     );

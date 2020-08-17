@@ -38,6 +38,7 @@ const FormComponent = (props) => {
         context.setPage(context.page)
     }
     const handleCancel = (context) => {
+        debugger
         context.page.formModalStatus = false
         context.setPage(context.page)
     }
